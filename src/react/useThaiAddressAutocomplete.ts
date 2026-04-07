@@ -48,7 +48,7 @@ export function useThaiAddressAutocomplete(options: UseThaiAddressAutocompleteOp
       const idx = matchedRecordsRef.current.findIndex(r => String(r.tambonId) === item.id)
       const record = matchedRecordsRef.current[idx]
       if (!record) {
-        throw new Error(`[thai-address] No record found for suggestion id "${item.id}". Make sure to use suggestions returned by this hook.`)
+        throw new Error(`[thaizip] No record found for suggestion id "${item.id}". Make sure to use suggestions returned by this hook.`)
       }
       setSuggestions([])
       matchedRecordsRef.current = []

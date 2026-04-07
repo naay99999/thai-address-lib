@@ -1,16 +1,24 @@
 {
-  "name": "thai-address",
+  "name": "thaizip",
   "version": "0.1.0",
   "description": "Fast, fuzzy Thai address autocomplete library (headless + React)",
-  "type": "module",
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
-  "sideEffects": false,
-  "files": [
-    "dist",
-    "data"
+  "keywords": [
+    "thai",
+    "address",
+    "autocomplete",
+    "thailand"
   ],
+  "homepage": "https://github.com/naay99999/thai-address-lib#readme",
+  "bugs": {
+    "url": "https://github.com/naay99999/thai-address-lib/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/naay99999/thai-address-lib.git"
+  },
+  "license": "MIT",
+  "author": "narablyat",
+  "type": "module",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -23,30 +31,20 @@
       "require": "./dist/data.cjs"
     }
   },
-  "engines": {
-    "node": ">=14"
-  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "data"
+  ],
+  "sideEffects": false,
   "scripts": {
     "build": "tsup",
     "generate-data": "tsx src/data/generate.ts",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage"
-  },
-  "keywords": [
-    "thai",
-    "address",
-    "autocomplete",
-    "thailand"
-  ],
-  "license": "MIT",
-  "peerDependencies": {
-    "react": ">=18.0.0"
-  },
-  "peerDependenciesMeta": {
-    "react": {
-      "optional": true
-    }
   },
   "devDependencies": {
     "@testing-library/react": "^16.3.2",
@@ -60,5 +58,16 @@
     "tsx": "^4.21.0",
     "typescript": "^6.0.2",
     "vitest": "^4.1.2"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    }
+  },
+  "engines": {
+    "node": ">=14"
   }
 }

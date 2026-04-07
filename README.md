@@ -1,4 +1,4 @@
-# thai-address
+# thaizip
 
 ไลบรารี autocomplete ที่อยู่ไทยแบบ fuzzy search รวดเร็ว รองรับทั้ง Vanilla JS และ React
 
@@ -13,7 +13,7 @@
 ## ติดตั้ง
 
 ```bash
-npm install thai-address
+npm install thaizip
 ```
 
 ถ้าใช้กับ React ต้องมี React >= 18 เป็น peer dependency อยู่แล้ว ไม่ต้องติดตั้งเพิ่ม
@@ -25,8 +25,8 @@ npm install thai-address
 ### ค้นหาที่อยู่
 
 ```ts
-import { defaultIndex } from 'thai-address/data'
-import { searchThaiAddress } from 'thai-address'
+import { defaultIndex } from 'thaizip/data'
+import { searchThaiAddress } from 'thaizip'
 
 // ค้นหาด้วยชื่อตำบล/อำเภอ/จังหวัด
 const results = searchThaiAddress(defaultIndex, 'ลาดพร้าว')
@@ -55,7 +55,7 @@ const results = searchThaiAddress(defaultIndex, 'ลาดพร้าว', {
 **`formatThaiAddressSuggestion`** — ใช้แสดงใน dropdown
 
 ```ts
-import { formatThaiAddressSuggestion } from 'thai-address'
+import { formatThaiAddressSuggestion } from 'thaizip'
 
 const suggestion = formatThaiAddressSuggestion(results[0])
 // {
@@ -71,7 +71,7 @@ const suggestion = formatThaiAddressSuggestion(results[0])
 **`resolveThaiAddress`** — ใช้บันทึกข้อมูลหลังผู้ใช้เลือก
 
 ```ts
-import { resolveThaiAddress } from 'thai-address'
+import { resolveThaiAddress } from 'thaizip'
 
 const resolved = resolveThaiAddress(results[0])
 // {
@@ -91,8 +91,8 @@ const resolved = resolveThaiAddress(results[0])
 Hook นี้จัดการ state ของ query, suggestions, debounce ให้ทั้งหมด
 
 ```tsx
-import { defaultIndex } from 'thai-address/data'
-import { useThaiAddressAutocomplete } from 'thai-address'
+import { defaultIndex } from 'thaizip/data'
+import { useThaiAddressAutocomplete } from 'thaizip'
 
 function AddressForm() {
   const { query, setQuery, suggestions, isOpen, selectSuggestion, clear } =
@@ -156,8 +156,8 @@ function AddressForm() {
 
 ```ts
 import express from 'express'
-import { defaultIndex } from 'thai-address/data'
-import { searchThaiAddress, formatThaiAddressSuggestion } from 'thai-address'
+import { defaultIndex } from 'thaizip/data'
+import { searchThaiAddress, formatThaiAddressSuggestion } from 'thaizip'
 
 const app = express()
 
@@ -185,7 +185,7 @@ GET /address/search?q=10900
 หากต้องการสร้าง index จากข้อมูลที่กำหนดเอง
 
 ```ts
-import { buildThaiAddressIndex } from 'thai-address'
+import { buildThaiAddressIndex } from 'thaizip'
 
 const index = buildThaiAddressIndex({
   geographies: [...],

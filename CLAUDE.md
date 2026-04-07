@@ -19,11 +19,11 @@ npx vitest run src/__tests__/search.test.ts
 
 ## Architecture
 
-This is a headless Thai address autocomplete library published as `thai-address`. It ships both a vanilla-JS API and an optional React hook.
+This is a headless Thai address autocomplete library published as `thaizip`. It ships both a vanilla-JS API and an optional React hook.
 
 **Package exports:**
-- `thai-address` — core functions + React hook
-- `thai-address/data` — pre-built `defaultIndex` (heavy, ~1 MB serialised; kept in a separate export so tree-shakers can isolate it)
+- `thaizip` — core functions + React hook
+- `thaizip/data` — pre-built `defaultIndex` (heavy, ~1 MB serialised; kept in a separate export so tree-shakers can isolate it)
 
 **Data pipeline:**
 - Raw JSON files in `data/` (thai_geographies, thai_provinces, thai_amphures, thai_tambons) are the source of truth
