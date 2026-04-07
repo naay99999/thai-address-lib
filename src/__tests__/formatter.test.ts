@@ -4,8 +4,6 @@ import { resolveThaiAddress } from '../core/resolver'
 import type { ThaiAddressRecord } from '../types'
 
 const record: ThaiAddressRecord = {
-  geographyId: 1,
-  geographyNameTh: 'ภาคกลาง',
   provinceId: 1,
   provinceNameTh: 'กรุงเทพมหานคร',
   provinceNameEn: 'Bangkok',

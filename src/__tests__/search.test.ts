@@ -86,4 +86,25 @@ describe('searchThaiAddress', () => {
     const upper = searchThaiAddress(index, 'BANGKOK')
     expect(lower.length).toBe(upper.length)
   })
+
+  // A-4: threshold boundary
+  it('returns empty when threshold is 1.0 and query has no perfect match', () => {
+    const results = searchThaiAddress(index, 'xyzabc', { threshold: 1.0 })
+    expect(results).toHaveLength(0)
+  })
+
+  it('returns results when threshold is 0', () => {
+    const results = searchThaiAddress(index, 'กรุง', { threshold: 0 })
+    expect(results.length).toBeGreaterThan(0)
+  })
+
+  // A-5: single-digit zip
+  it('returns empty for single-digit zip code', () => {
+    expect(searchThaiAddress(index, '1')).toHaveLength(0)
+  })
+
+  // A-6: whitespace-only query
+  it('returns empty for whitespace-only query', () => {
+    expect(searchThaiAddress(index, '   ')).toHaveLength(0)
+  })
 })

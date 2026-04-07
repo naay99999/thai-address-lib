@@ -1,3 +1,6 @@
+// NOTE (SZ-4): CJS consumers (`dist/index.cjs`) cannot tree-shake this hook out of the bundle.
+// If you are using the CJS build in a non-React environment, import only from the core entry
+// or use the ESM build with a bundler that supports tree-shaking.
 import { useState, useEffect, useCallback, useRef } from 'react'
 import { searchThaiAddress } from '../core/search'
 import { formatThaiAddressSuggestion } from '../core/formatter'
@@ -15,8 +18,7 @@ export function useThaiAddressAutocomplete(options: UseThaiAddressAutocompleteOp
   const [query, setQueryState] = useState('')
   const [suggestions, setSuggestions] = useState<ThaiAddressSuggestion[]>([])
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
-  // Parallel array to suggestions — same index, same order
-  const matchedRecordsRef = useRef<ThaiAddressRecord[]>([])
+  const matchedRecordsMapRef = useRef<Map<string, ThaiAddressRecord>>(new Map())
 
   const setQuery = useCallback((value: string) => {
     setQueryState(value)
@@ -27,14 +29,19 @@ export function useThaiAddressAutocomplete(options: UseThaiAddressAutocompleteOp
 
     if (query.length === 0) {
       setSuggestions([])
-      matchedRecordsRef.current = []
+      matchedRecordsMapRef.current = new Map()
       return
     }
 
     timerRef.current = setTimeout(() => {
       const records = searchThaiAddress(index, query, { limit, threshold })
-      matchedRecordsRef.current = records
-      setSuggestions(records.map(formatThaiAddressSuggestion))
+      const formatted = records.map(formatThaiAddressSuggestion)
+      const recordMap = new Map<string, ThaiAddressRecord>()
+      for (let i = 0; i < records.length; i++) {
+        recordMap.set(formatted[i].id, records[i])
+      }
+      matchedRecordsMapRef.current = recordMap
+      setSuggestions(formatted)
     }, debounceMs)
 
     return () => {
@@ -42,16 +49,20 @@ export function useThaiAddressAutocomplete(options: UseThaiAddressAutocompleteOp
     }
   }, [query, index, limit, threshold, debounceMs])
 
+  /**
+   * Resolves a suggestion to a full ThaiAddress and clears the suggestions list.
+   *
+   * Note: `query` is intentionally left unchanged so the input field retains the
+   * typed text. Call `clear()` afterwards if you want to reset the input as well.
+   */
   const selectSuggestion = useCallback(
     (item: ThaiAddressSuggestion): ResolvedThaiAddress => {
-      // O(1) lookup via parallel array — same index as suggestions array
-      const idx = matchedRecordsRef.current.findIndex(r => String(r.tambonId) === item.id)
-      const record = matchedRecordsRef.current[idx]
+      const record = matchedRecordsMapRef.current.get(item.id)
       if (!record) {
         throw new Error(`[thaizip] No record found for suggestion id "${item.id}". Make sure to use suggestions returned by this hook.`)
       }
       setSuggestions([])
-      matchedRecordsRef.current = []
+      matchedRecordsMapRef.current = new Map()
       return resolveThaiAddress(record)
     },
     [],
@@ -60,7 +71,7 @@ export function useThaiAddressAutocomplete(options: UseThaiAddressAutocompleteOp
   const clear = useCallback(() => {
     setQueryState('')
     setSuggestions([])
-    matchedRecordsRef.current = []
+    matchedRecordsMapRef.current = new Map()
   }, [])
 
   return {

@@ -1,5 +1,5 @@
 import { normalizeThaiAddressText } from './normalizer'
-import { extractTrigrams } from './trigrams'
+import { extractTrigramsNormalized } from './trigrams'
 import type { SearchOptions, ThaiAddressRecord, TrigramIndex } from '../types'
 
 const ZIP_CODE_RE = /^\d+$/
@@ -19,12 +19,22 @@ export function searchThaiAddress(
   // Special case: zip code query (require at least 2 digits to avoid overly broad matches)
   if (ZIP_CODE_RE.test(normalized)) {
     if (normalized.length < 2) return []
-    return index.records
-      .filter(r => r.zipCode.startsWith(normalized))
-      .slice(0, limit)
+    const matches: ThaiAddressRecord[] = []
+    for (const [zip, indices] of index.zipIndex) {
+      if (zip.startsWith(normalized)) {
+        for (const idx of indices) matches.push(index.records[idx])
+      }
+    }
+    // exact match first, then ascending zip code
+    matches.sort((a, b) => {
+      if (a.zipCode === normalized && b.zipCode !== normalized) return -1
+      if (b.zipCode === normalized && a.zipCode !== normalized) return 1
+      return a.zipCode.localeCompare(b.zipCode)
+    })
+    return matches.slice(0, limit)
   }
 
-  const queryTrigrams = extractTrigrams(normalized)
+  const queryTrigrams = extractTrigramsNormalized(normalized)
   if (queryTrigrams.size === 0) return []
 
   // Accumulate hit counts per record index

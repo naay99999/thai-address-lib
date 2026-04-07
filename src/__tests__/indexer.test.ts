@@ -30,7 +30,7 @@ describe('buildThaiAddressIndex', () => {
     expect(index.records).toHaveLength(3)
   })
 
-  it('correctly joins tambon with amphure, province, geography', () => {
+  it('correctly joins tambon with amphure and province', () => {
     const index = buildThaiAddressIndex(mockData)
     const latPhrao = index.records.find(r => r.tambonId === 100101)!
     expect(latPhrao.tambonNameTh).toBe('ลาดพร้าว')
@@ -39,7 +39,6 @@ describe('buildThaiAddressIndex', () => {
     expect(latPhrao.amphureNameEn).toBe('Chatuchak')
     expect(latPhrao.provinceNameTh).toBe('กรุงเทพมหานคร')
     expect(latPhrao.provinceNameEn).toBe('Bangkok')
-    expect(latPhrao.geographyNameTh).toBe('ภาคกลาง')
     expect(latPhrao.zipCode).toBe('10900')
   })
 

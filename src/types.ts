@@ -1,7 +1,4 @@
 export type ThaiAddressRecord = {
-  geographyId: number
-  geographyNameTh: string
-
   provinceId: number
   provinceNameTh: string
   provinceNameEn: string
@@ -20,6 +17,7 @@ export type ThaiAddressRecord = {
 export type TrigramIndex = {
   map: Map<string, Set<number>>
   records: ThaiAddressRecord[]
+  zipIndex: Map<string, number[]>
 }
 
 export type ThaiAddressSuggestion = {

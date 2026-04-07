@@ -2,12 +2,9 @@ import { extractTrigrams } from './trigrams'
 import type { RawData, ThaiAddressRecord, TrigramIndex } from '../types'
 
 export function buildThaiAddressIndex(data: RawData): TrigramIndex {
-  const { geographies, provinces, amphures, tambons } = data
+  const { provinces, amphures, tambons } = data
 
   // Build lookup maps (filter deleted)
-  const geoMap = new Map(
-    geographies.filter(g => !g.deleted_at).map(g => [g.id, g])
-  )
   const provMap = new Map(
     provinces.filter(p => !p.deleted_at).map(p => [p.id, p])
   )
@@ -17,6 +14,7 @@ export function buildThaiAddressIndex(data: RawData): TrigramIndex {
 
   const records: ThaiAddressRecord[] = []
   const map = new Map<string, Set<number>>()
+  const zipIndex = new Map<string, number[]>()
 
   for (const tambon of tambons) {
     if (tambon.deleted_at) continue
@@ -27,12 +25,7 @@ export function buildThaiAddressIndex(data: RawData): TrigramIndex {
     const province = provMap.get(amphure.province_id)
     if (!province) continue
 
-    const geography = geoMap.get(province.geography_id)
-    if (!geography) continue
-
     const record: ThaiAddressRecord = {
-      geographyId: geography.id,
-      geographyNameTh: geography.name,
       provinceId: province.id,
       provinceNameTh: province.name_th,
       provinceNameEn: province.name_en,
@@ -47,6 +40,11 @@ export function buildThaiAddressIndex(data: RawData): TrigramIndex {
 
     const idx = records.length
     records.push(record)
+
+    // Build zip index
+    const existing = zipIndex.get(record.zipCode)
+    if (existing) existing.push(idx)
+    else zipIndex.set(record.zipCode, [idx])
 
     const fields = [
       record.tambonNameTh,
@@ -70,5 +68,5 @@ export function buildThaiAddressIndex(data: RawData): TrigramIndex {
     }
   }
 
-  return { map, records }
+  return { map, records, zipIndex }
 }
