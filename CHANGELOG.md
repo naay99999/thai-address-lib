@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.1](https://github.com/naay99999/thai-address-lib/compare/thaizip-v0.2.0...thaizip-v0.2.1) (2026-04-07)
+
+
+### Bug Fixes
+
+* trim whitespace after stripping Thai address prefix ([dc8579b](https://github.com/naay99999/thai-address-lib/commit/dc8579b9c5b36b69a409be6662d9d687122814a3))
+
 ## [0.2.0](https://github.com/naay99999/thai-address-lib/compare/v0.1.0...v0.2.0) (2026-04-07)
 
 ### ⚠ BREAKING CHANGES
