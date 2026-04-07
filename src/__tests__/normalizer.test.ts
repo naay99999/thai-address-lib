@@ -38,6 +38,10 @@ describe('normalizeThaiAddressText', () => {
     expect(normalizeThaiAddressText(' จังหวัดลาดพราว ')).toBe('ลาดพราว')
   })
 
+  it('trims space left after stripping prefix (e.g. "เขต จตุจักร")', () => {
+    expect(normalizeThaiAddressText('เขต จตุจักร')).toBe('จตุจักร')
+  })
+
   it('returns empty string for empty input', () => {
     expect(normalizeThaiAddressText('')).toBe('')
   })
