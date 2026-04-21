@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.3.0](https://github.com/naay99999/thai-zip/compare/thaizip-v0.2.1...thaizip-v0.3.0) (2026-04-21)
+
+
+### ⚠ BREAKING CHANGES
+
+* replace sync defaultIndex with async loadDefaultIndex (132KB gzip vs 630KB)
+* add English name fields to ThaiAddressSuggestion and ResolvedThaiAddress
+
+### Features
+
+* add English name fields to ThaiAddressSuggestion and ResolvedThaiAddress ([4212981](https://github.com/naay99999/thai-zip/commit/4212981c7af34fe79f0c5682c0c415804202b3c9))
+* replace sync defaultIndex with async loadDefaultIndex (132KB gzip vs 630KB) ([3032ae3](https://github.com/naay99999/thai-zip/commit/3032ae31ae50c5a5c04d51e34b7b2ce994781dca))
+
 ## [0.2.1](https://github.com/naay99999/thai-address-lib/compare/thaizip-v0.2.0...thaizip-v0.2.1) (2026-04-07)
 
 
