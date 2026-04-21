@@ -5,7 +5,7 @@
 - ค้นหาได้ทั้งภาษาไทย ภาษาอังกฤษ และรหัสไปรษณีย์
 - Fuzzy search — ไม่ต้องใส่วรรณยุกต์ก็ค้นหาได้ เช่น "ลาดพราว" เจอ "ลาดพร้าว"
 - ไม่มี dependency นอกจาก React (optional)
-- Index สร้างไว้ล่วงหน้า ไม่มีต้นทุนตอน runtime
+- โหลดข้อมูลแบบ async — ไม่บล็อก initial bundle (~132 KB gzip)
 - รองรับ ESM และ CJS
 
 ---
@@ -22,20 +22,23 @@ npm install thaizip
 
 ## การใช้งานพื้นฐาน (Vanilla JS / TypeScript)
 
-### ค้นหาที่อยู่
+### โหลด index และค้นหาที่อยู่
 
 ```ts
-import { defaultIndex } from 'thaizip/data'
+import { loadDefaultIndex } from 'thaizip/data'
 import { searchThaiAddress } from 'thaizip'
 
+// โหลด index ครั้งแรก ~200ms (cached หลังจากนั้น)
+const index = await loadDefaultIndex()
+
 // ค้นหาด้วยชื่อตำบล/อำเภอ/จังหวัด
-const results = searchThaiAddress(defaultIndex, 'ลาดพร้าว')
+const results = searchThaiAddress(index, 'ลาดพร้าว')
 
 // ค้นหาด้วยรหัสไปรษณีย์
-const results = searchThaiAddress(defaultIndex, '10900')
+const results2 = searchThaiAddress(index, '10900')
 
 // ค้นหาด้วยภาษาอังกฤษ
-const results = searchThaiAddress(defaultIndex, 'chiang mai')
+const results3 = searchThaiAddress(index, 'chiang mai')
 
 console.log(results)
 // [{ tambonId, tambonNameTh, tambonNameEn, amphureId, amphureNameTh, ... zipCode }, ...]
@@ -44,7 +47,7 @@ console.log(results)
 ### ตัวเลือก (options)
 
 ```ts
-const results = searchThaiAddress(defaultIndex, 'ลาดพร้าว', {
+const results = searchThaiAddress(index, 'ลาดพร้าว', {
   limit: 5,       // จำนวนผลลัพธ์สูงสุด (default: 10)
   threshold: 0.4, // ความแม่นยำขั้นต่ำ 0–1 (default: 0.4)
 })
@@ -61,9 +64,9 @@ const suggestion = formatThaiAddressSuggestion(results[0])
 // {
 //   id: '100101',
 //   label: 'ลาดพร้าว > ลาดพร้าว > กรุงเทพมหานคร 10230',
-//   tambon: 'ลาดพร้าว',
-//   amphure: 'ลาดพร้าว',
-//   province: 'กรุงเทพมหานคร',
+//   tambon: 'ลาดพร้าว',     tambonEn: 'Lat Phrao',
+//   amphure: 'ลาดพร้าว',    amphureEn: 'Lat Phrao',
+//   province: 'กรุงเทพมหานคร', provinceEn: 'Bangkok',
 //   zipCode: '10230',
 // }
 ```
@@ -75,10 +78,13 @@ import { resolveThaiAddress } from 'thaizip'
 
 const resolved = resolveThaiAddress(results[0])
 // {
-//   tambon: 'ลาดพร้าว',        subdistrict: 'ลาดพร้าว',
-//   amphure: 'ลาดพร้าว',       district: 'ลาดพร้าว',
-//   province: 'กรุงเทพมหานคร',
-//   zipCode: '10230',           postalCode: '10230',
+//   tambon: 'ลาดพร้าว',        tambonEn: 'Lat Phrao',
+//   amphure: 'ลาดพร้าว',       amphureEn: 'Lat Phrao',
+//   province: 'กรุงเทพมหานคร', provinceEn: 'Bangkok',
+//   zipCode: '10230',
+//   subdistrict: 'ลาดพร้าว',   subdistrictEn: 'Lat Phrao',
+//   district: 'ลาดพร้าว',      districtEn: 'Lat Phrao',
+//   postalCode: '10230',
 // }
 ```
 
@@ -91,19 +97,29 @@ const resolved = resolveThaiAddress(results[0])
 Hook นี้จัดการ state ของ query, suggestions, debounce ให้ทั้งหมด
 
 ```tsx
-import { defaultIndex } from 'thaizip/data'
+import { useState, useEffect } from 'react'
+import { loadDefaultIndex } from 'thaizip/data'
 import { useThaiAddressAutocomplete } from 'thaizip'
+import type { TrigramIndex } from 'thaizip'
 
 function AddressForm() {
+  const [index, setIndex] = useState<TrigramIndex | null>(null)
+
+  useEffect(() => {
+    loadDefaultIndex().then(setIndex)
+  }, [])
+
   const { query, setQuery, suggestions, isOpen, selectSuggestion, clear } =
     useThaiAddressAutocomplete({
-      index: defaultIndex,
+      index: index!,
       limit: 10,       // default: 10
       debounce: 200,   // default: 200ms
       threshold: 0.4,  // default: 0.4
     })
 
   const [address, setAddress] = useState(null)
+
+  if (!index) return <p>กำลังโหลด...</p>
 
   return (
     <div>
@@ -128,9 +144,9 @@ function AddressForm() {
 
       {address && (
         <div>
-          <p>ตำบล: {address.tambon}</p>
-          <p>อำเภอ: {address.amphure}</p>
-          <p>จังหวัด: {address.province}</p>
+          <p>ตำบล: {address.tambon} ({address.tambonEn})</p>
+          <p>อำเภอ: {address.amphure} ({address.amphureEn})</p>
+          <p>จังหวัด: {address.province} ({address.provinceEn})</p>
           <p>รหัสไปรษณีย์: {address.zipCode}</p>
         </div>
       )}
@@ -156,16 +172,19 @@ function AddressForm() {
 
 ```ts
 import express from 'express'
-import { defaultIndex } from 'thaizip/data'
+import { loadDefaultIndex } from 'thaizip/data'
 import { searchThaiAddress, formatThaiAddressSuggestion } from 'thaizip'
 
 const app = express()
+
+// โหลด index ครั้งเดียวตอน startup
+const index = await loadDefaultIndex()
 
 app.get('/address/search', (req, res) => {
   const query = String(req.query.q ?? '')
   if (!query) return res.json([])
 
-  const results = searchThaiAddress(defaultIndex, query, { limit: 10 })
+  const results = searchThaiAddress(index, query, { limit: 10 })
   res.json(results.map(formatThaiAddressSuggestion))
 })
 
@@ -204,22 +223,45 @@ const index = buildThaiAddressIndex({
 ```ts
 type ThaiAddressSuggestion = {
   id: string
-  label: string       // "ตำบล > อำเภอ > จังหวัด XXXXX"
+  label: string        // "ตำบล > อำเภอ > จังหวัด XXXXX"
   tambon: string
+  tambonEn: string
   amphure: string
+  amphureEn: string
   province: string
+  provinceEn: string
   zipCode: string
 }
 
 type ResolvedThaiAddress = {
-  tambon: string      // alias: subdistrict
-  amphure: string     // alias: district
+  tambon: string        // alias: subdistrict
+  tambonEn: string      // alias: subdistrictEn
+  amphure: string       // alias: district
+  amphureEn: string     // alias: districtEn
   province: string
-  zipCode: string     // alias: postalCode
+  provinceEn: string
+  zipCode: string       // alias: postalCode
   subdistrict: string
+  subdistrictEn: string
   district: string
+  districtEn: string
   postalCode: string
 }
+```
+
+---
+
+## Migration จาก v0.x
+
+```ts
+// v0.x (sync)
+import { defaultIndex } from 'thaizip/data'
+const results = searchThaiAddress(defaultIndex, query)
+
+// v1.0 (async)
+import { loadDefaultIndex } from 'thaizip/data'
+const index = await loadDefaultIndex()  // cache อัตโนมัติ
+const results = searchThaiAddress(index, query)
 ```
 
 ---

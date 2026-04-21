@@ -9,10 +9,10 @@ export default defineConfig([
     splitting: false,
     sourcemap: true,
     clean: true,
-    external: ['react', 'react-dom', './data/defaultIndex'],
+    external: ['react', 'react-dom'],
     treeshake: true,
   },
-  // Data entry: pre-built defaultIndex (optional, large)
+  // Data entry: compact raw data + async loader (replaces pre-built defaultIndex)
   {
     entry: { data: 'src/data/index.ts' },
     format: ['esm', 'cjs'],

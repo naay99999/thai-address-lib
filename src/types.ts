@@ -24,18 +24,26 @@ export type ThaiAddressSuggestion = {
   id: string
   label: string
   tambon: string
+  tambonEn: string
   amphure: string
+  amphureEn: string
   province: string
+  provinceEn: string
   zipCode: string
 }
 
 export type ResolvedThaiAddress = {
   tambon: string
+  tambonEn: string
   amphure: string
+  amphureEn: string
   province: string
+  provinceEn: string
   zipCode: string
   subdistrict: string
+  subdistrictEn: string
   district: string
+  districtEn: string
   postalCode: string
 }
 

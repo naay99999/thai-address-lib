@@ -1,16 +1,15 @@
 /**
- * Build script: reads raw JSON data → generates src/data/defaultIndex.ts
+ * Build script: reads raw JSON data → generates src/data/defaultData.ts
  * Run: npm run generate-data
  */
 import { readFileSync, writeFileSync } from 'fs'
 import { resolve, dirname } from 'path'
 import { fileURLToPath } from 'url'
-import { buildThaiAddressIndex } from '../core/indexer'
 import type { RawData } from '../types'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const dataDir = resolve(__dirname, '../../data')
-const outFile = resolve(__dirname, 'defaultIndex.ts')
+const outFile = resolve(__dirname, 'defaultData.ts')
 
 function readJson<T>(filename: string): T {
   return JSON.parse(readFileSync(resolve(dataDir, filename), 'utf-8')) as T
@@ -46,38 +45,34 @@ const rawData: RawData = {
 
 validateRawData(rawData)
 
-console.time('buildThaiAddressIndex')
-const index = buildThaiAddressIndex(rawData)
-console.timeEnd('buildThaiAddressIndex')
+// Compact format: arrays instead of objects, filter deleted at generate time
+// p: [id, nameTh, nameEn]
+const provinces = rawData.provinces
+  .filter(p => !p.deleted_at)
+  .map(p => [p.id, p.name_th, p.name_en] as [number, string, string])
 
-console.log(`Built index: ${index.records.length} records, ${index.map.size} trigrams, ${index.zipIndex.size} zip codes`)
+// a: [id, nameTh, nameEn, provinceId]
+const amphures = rawData.amphures
+  .filter(a => !a.deleted_at)
+  .map(a => [a.id, a.name_th, a.name_en, a.province_id] as [number, string, string, number])
 
-// Serialize Map<string, Set<number>> as [string, number[]][]
-const serializedMap: [string, number[]][] = []
-for (const [key, set] of index.map) {
-  serializedMap.push([key, Array.from(set)])
-}
+// t: [id, nameTh, nameEn, amphureId, zipCode]
+const tambons = rawData.tambons
+  .filter(t => !t.deleted_at)
+  .map(t => [t.id, t.name_th, t.name_en, t.amphure_id, String(t.zip_code)] as [number, string, string, number, string])
 
-// Serialize zipIndex
-const serializedZip: [string, number[]][] = Array.from(index.zipIndex.entries())
+console.log(`Compact data: ${provinces.length} provinces, ${amphures.length} amphures, ${tambons.length} tambons`)
 
 const output = `// AUTO-GENERATED — do not edit manually
 // Run: npm run generate-data
-import type { TrigramIndex } from '../types'
 
-const records = ${JSON.stringify(index.records)}
+export type CompactProvince = [number, string, string]           // [id, nameTh, nameEn]
+export type CompactAmphure  = [number, string, string, number]  // [id, nameTh, nameEn, provinceId]
+export type CompactTambon   = [number, string, string, number, string] // [id, nameTh, nameEn, amphureId, zipCode]
 
-const mapEntries: [string, number[]][] = ${JSON.stringify(serializedMap)}
-
-const map = new Map<string, Set<number>>(
-  mapEntries.map(([k, v]) => [k, new Set(v)])
-)
-
-const zipEntries: [string, number[]][] = ${JSON.stringify(serializedZip)}
-
-const zipIndex = new Map<string, number[]>(zipEntries)
-
-export const defaultIndex: TrigramIndex = { map, records: records as unknown as import('../types').ThaiAddressRecord[], zipIndex }
+export const p: CompactProvince[] = ${JSON.stringify(provinces)}
+export const a: CompactAmphure[]  = ${JSON.stringify(amphures)}
+export const t: CompactTambon[]   = ${JSON.stringify(tambons)}
 `
 
 writeFileSync(outFile, output, 'utf-8')
