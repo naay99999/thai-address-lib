@@ -23,7 +23,7 @@ This is a headless Thai address autocomplete library published as `thaizip`. It 
 
 **Package exports:**
 - `thaizip` — core functions + React hook
-- `thaizip/data` — pre-built `defaultIndex` (heavy, ~1 MB serialised; kept in a separate export so tree-shakers can isolate it)
+- `thaizip/data` — exports `loadDefaultIndex()` (async, lazy-loads the pre-built compact address data ~132 KB gzip; separate export so tree-shakers can isolate it)
 
 **Data pipeline:**
 - Raw JSON files in `data/` (thai_geographies, thai_provinces, thai_amphures, thai_tambons) are the source of truth
