@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.4](https://github.com/naay99999/thai-zip/compare/thaizip-v0.7.3...thaizip-v0.7.4) (2026-09-09)
+
+
+### Bug Fixes
+
+* stabilize search ranking and harden ZIP lookup and dependencies ([21bd91f](https://github.com/naay99999/thai-zip/commit/21bd91f06b9e66cab6f159458e4c44e63aa8cf15))
+
 ## [0.7.3](https://github.com/naay99999/thai-zip/compare/thaizip-v0.7.2...thaizip-v0.7.3) (2026-08-27)
 
 
