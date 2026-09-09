@@ -2,8 +2,8 @@
 //
 // `ranking-baseline.json` is a frozen snapshot of tambonId order for a broad
 // query set (36 Thai/romanized/zip queries x 5 search variants each), verified
-// byte-identical across the performance-audit optimization work (see
-// docs/reports/performance-audit.md). Any change to trigram scoring, sorting,
+// refreshed after fixing incomplete alphabetical tie groups at the limit
+// boundary. Any change to trigram scoring, sorting,
 // or the collator tie-break that shifts result order for any of these queries
 // fails this suite loudly.
 //

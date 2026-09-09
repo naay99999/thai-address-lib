@@ -67,6 +67,8 @@ lookupByZipCode(index, '45000') // exact
 lookupByZipCode(index, '450')   // prefix
 ```
 
+Direct ZIP lookup rejects raw inputs longer than 1000 characters before scanning them. A finite `zipLimit` also bounds how many matching records are collected.
+
 ### English input
 
 The dataset indexes official RTGS spellings, so `bang rak` and `chatuchak` work directly. 87 common non-RTGS spellings are mapped on first: `lardprao` → `lat phrao`, `ladkrabang` → `lat krabang`, `krungthep` → `bangkok`. It is a curated dictionary, not a transliterator — unlisted spellings still miss. Opt out with `romanizationAliases: false`.

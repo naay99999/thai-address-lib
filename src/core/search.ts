@@ -19,15 +19,6 @@ function compareZip(a: string, b: string): number {
   return 0
 }
 
-function sortZipMatches(matches: ThaiAddressRecord[], exactZip: string): ThaiAddressRecord[] {
-  matches.sort((a, b) => {
-    if (a.zipCode === exactZip && b.zipCode !== exactZip) return -1
-    if (b.zipCode === exactZip && a.zipCode !== exactZip) return 1
-    return compareZip(a.zipCode, b.zipCode)
-  })
-  return matches
-}
-
 /**
  * Normalize a user-supplied limit near the public boundary so that
  * `Array.prototype.slice` never sees a value with surprising semantics:
@@ -53,7 +44,8 @@ function normalizeLimit(value: number): number {
  * prefix range — O(log n_zips + matches). Ascending key order places an
  * exact match before any longer prefix match automatically, so no explicit
  * exact-first sort is needed. Indexes without the sorted arrays (older
- * shape, hand-built) fall back to the original O(n_zips) scan + sort.
+ * shape, hand-built) scan and sort matching keys before collecting records.
+ * Both paths stop collecting when `zipLimit` is reached.
  *
  * Returned records are shallow copies: mutating them cannot corrupt the
  * shared index (see `searchThaiAddress`).
@@ -62,8 +54,8 @@ function normalizeLimit(value: number): number {
  * only by `options.zipLimit` (defaults to `Infinity`), since a zip code can
  * legitimately map to dozens of tambons (e.g. `45000` → 33 records).
  *
- * Malformed runtime input (non-string `zip`, missing index shape) returns
- * `[]` rather than crashing deep inside the library.
+ * Malformed runtime input (non-string `zip`, missing index shape) and raw
+ * strings longer than 1000 characters return `[]`.
  */
 export function lookupByZipCode(
   index: TrigramIndex,
@@ -71,10 +63,12 @@ export function lookupByZipCode(
   options?: SearchOptions,
 ): ThaiAddressRecord[] {
   if (!index || !index.zipIndex || !index.records || typeof zip !== 'string') return []
+  // Match the text-search raw input bound before trim or regex scanning.
+  if (zip.length > 1000) return []
+  const zipLimit = normalizeLimit(options?.zipLimit ?? Infinity)
+  if (zipLimit === 0) return []
   const normalized = zip.trim()
   if (!ZIP_CODE_RE.test(normalized) || normalized.length < 2) return []
-
-  const zipLimit = normalizeLimit(options?.zipLimit ?? Infinity)
 
   const matches: ThaiAddressRecord[] = []
   const keys = index.sortedZipKeys
@@ -88,17 +82,21 @@ export function lookupByZipCode(
       if (keys[mid] < normalized) lo = mid + 1
       else hi = mid
     }
-    for (let i = lo; i < keys.length && keys[i].startsWith(normalized); i++) {
+    for (let i = lo; i < keys.length && keys[i].startsWith(normalized) && matches.length < zipLimit; i++) {
       const indices = postings[i]
-      for (let j = 0; j < indices.length; j++) matches.push(index.records[indices[j]])
+      for (let j = 0; j < indices.length && matches.length < zipLimit; j++) matches.push(index.records[indices[j]])
     }
   } else {
-    for (const [z, indices] of index.zipIndex) {
-      if (z.startsWith(normalized)) {
-        for (const idx of indices) matches.push(index.records[idx])
+    // Older indexes need their matching keys ordered before collecting records.
+    // Sorting records first would allocate all matches even for zipLimit: 1.
+    const matchingKeys = [...index.zipIndex.keys()].filter(z => z.startsWith(normalized)).sort(compareZip)
+    for (const z of matchingKeys) {
+      if (matches.length >= zipLimit) break
+      for (const idx of index.zipIndex.get(z)!) {
+        if (matches.length >= zipLimit) break
+        matches.push(index.records[idx])
       }
     }
-    sortZipMatches(matches, normalized)
   }
   // Shallow-copy after slicing so only the returned records are cloned.
   return matches.slice(0, zipLimit).map(record => ({ ...record }))
@@ -182,6 +180,7 @@ export function searchThaiAddress(
   // trigram keys shorter than 3 chars for names of length >= 3, so a sub-3-char
   // query can never usefully match anything.
   if (normalized.length < 3) return []
+  if (limit === 0) return []
 
   // Expand common non-RTGS romanizations (e.g. "lardprao" -> "lat phrao") for
   // Latin-script queries. Thai-script queries are passed through untouched.
@@ -226,10 +225,16 @@ export function searchThaiAddress(
     return b.matchRank - a.matchRank
   })
 
-  // Only the top window is worth the expense of a locale-aware tie-break;
-  // re-sort just that slice with the full comparator (including the
-  // module-level cached collator) before truncating to `limit`.
-  const windowSize = Math.max(limit * 4, 50)
+  // Include the entire tie group at the result boundary. Cutting a fixed
+  // window through a tie would discard candidates before their alphabetical
+  // order is known, making the top results depend on the requested limit.
+  let windowSize = Math.min(limit, scored.length)
+  const boundary = scored[windowSize - 1]
+  while (windowSize < scored.length &&
+    scored[windowSize].score === boundary.score &&
+    scored[windowSize].matchRank === boundary.matchRank) {
+    windowSize++
+  }
   const window = scored.slice(0, windowSize)
   window.sort((a, b) => {
     if (b.score !== a.score) return b.score - a.score
@@ -247,6 +252,6 @@ export function searchThaiAddress(
   // module-level singleton), so handing out live references would let one
   // consumer's mutation corrupt every other consumer's results. Copying at
   // most `limit` (~10) small flat objects is negligible next to the search
-  // itself — measured within noise on the benchmark suite.
+  // itself.
   return window.slice(0, limit).map(({ idx }) => ({ ...index.records[idx] }))
 }

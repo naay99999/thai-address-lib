@@ -1,5 +1,5 @@
 /// <reference types="node" />
-import { describe, it, expect, beforeAll } from 'vitest'
+import { describe, it, expect, beforeAll, vi } from 'vitest'
 import { readFileSync, readdirSync } from 'node:fs'
 import { join, resolve } from 'node:path'
 import { buildThaiAddressIndex, validateRawData } from '../core/indexer'
@@ -27,6 +27,52 @@ let defaultIndex: TrigramIndex
 
 beforeAll(async () => {
   defaultIndex = await loadDefaultIndex()
+})
+
+describe('bounded search work and stable ranking', () => {
+  it.each(['ban', 'เมือง', 'บาง', 'bang rak'])('keeps top results stable across limits for %s', query => {
+    const all = searchThaiAddress(defaultIndex, query, { limit: Infinity })
+    for (const limit of [1, 5, 10, 50]) {
+      expect(searchThaiAddress(defaultIndex, query, { limit })).toEqual(all.slice(0, limit))
+    }
+  })
+
+  it('rejects oversized ZIP input before trimming or scanning it', () => {
+    const trim = vi.spyOn(String.prototype, 'trim')
+    try {
+      const result = lookupByZipCode(defaultIndex, '1'.repeat(1_000_000))
+      const calls = trim.mock.calls.length
+      expect(result).toEqual([])
+      expect(calls).toBe(0)
+    } finally {
+      trim.mockRestore()
+    }
+  })
+
+  it.each([true, false])('bounds record reads with zipLimit (sorted index: %s)', sorted => {
+    const index = buildThaiAddressIndex(baseData)
+    // Deliberately reverse keys: older indexes must still return exact first.
+    index.zipIndex = new Map([['10901', [2]], ['10900', [0, 1]]])
+    if (!sorted) {
+      delete index.sortedZipKeys
+      delete index.sortedZipPostings
+    }
+    let reads = 0
+    index.records = new Proxy(index.records, {
+      get(target, key, receiver) {
+        if (typeof key === 'string' && /^\d+$/.test(key)) reads++
+        return Reflect.get(target, key, receiver)
+      },
+    })
+    const result = lookupByZipCode(index, '109', { zipLimit: 1 })
+    expect(reads).toBe(1)
+    expect(result.map(r => r.tambonId)).toEqual([100101])
+    reads = 0
+    expect(lookupByZipCode(index, '109', { zipLimit: 0 })).toEqual([])
+    expect(reads).toBe(0)
+    expect(lookupByZipCode(index, '109', { zipLimit: 2 })).toHaveLength(2)
+    expect(lookupByZipCode(index, '109')).toHaveLength(3)
+  })
 })
 
 // ---------------------------------------------------------------------------

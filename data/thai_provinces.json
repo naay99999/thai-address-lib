@@ -4,8 +4,6 @@
     "name_th": "กรุงเทพมหานคร",
     "name_en": "Bangkok",
     "geography_id": 2,
-    "created_at": "9/8/2019 03:33:09",
-    "updated_at": "16/5/2022 06:31:03",
     "deleted_at": null
   },
   {
@@ -13,8 +11,6 @@
     "name_th": "สมุทรปราการ",
     "name_en": "Samut Prakan",
     "geography_id": 2,
-    "created_at": "9/8/2019 03:33:09",
-    "updated_at": "16/5/2022 06:31:03",
     "deleted_at": null
   },
   {
@@ -22,8 +18,6 @@
     "name_th": "นนทบุรี",
     "name_en": "Nonthaburi",
     "geography_id": 2,
-    "created_at": "9/8/2019 03:33:09",
-    "updated_at": "16/5/2022 06:31:03",
     "deleted_at": null
   },
   {
@@ -31,8 +25,6 @@
     "name_th": "ปทุมธานี",
     "name_en": "Pathum Thani",
     "geography_id": 2,
-    "created_at": "9/8/2019 03:33:09",
-    "updated_at": "16/5/2022 06:31:03",
     "deleted_at": null
   },
   {
@@ -40,8 +32,6 @@
     "name_th": "พระนครศรีอยุธยา",
     "name_en": "Phra Nakhon Si Ayutthaya",
     "geography_id": 2,
-    "created_at": "9/8/2019 03:33:09",
-    "updated_at": "16/5/2022 06:31:03",
     "deleted_at": null
   },
   {
@@ -49,8 +39,6 @@
     "name_th": "อ่างทอง",
     "name_en": "Ang Thong",
     "geography_id": 2,
-    "created_at": "9/8/2019 03:33:09",
-    "updated_at": "16/5/2022 06:31:03",
     "deleted_at": null
   },
   {
@@ -58,8 +46,6 @@
     "name_th": "ลพบุรี",
     "name_en": "Loburi",
     "geography_id": 2,
-    "created_at": "9/8/2019 03:33:09",
-    "updated_at": "16/5/2022 06:31:03",
     "deleted_at": null
   },
   {
@@ -67,8 +53,6 @@
     "name_th": "สิงห์บุรี",
     "name_en": "Sing Buri",
     "geography_id": 2,
-    "created_at": "9/8/2019 03:33:09",
-    "updated_at": "16/5/2022 06:31:03",
     "deleted_at": null
   },
   {
@@ -76,8 +60,6 @@
     "name_th": "ชัยนาท",
     "name_en": "Chai Nat",
     "geography_id": 2,
-    "created_at": "9/8/2019 03:33:09",
-    "updated_at": "16/5/2022 06:31:03",
     "deleted_at": null
   },
   {
@@ -85,8 +67,6 @@
     "name_th": "สระบุรี",
     "name_en": "Saraburi",
     "geography_id": 2,
-    "created_at": "9/8/2019 03:33:09",
-    "updated_at": "16/5/2022 06:31:03",
     "deleted_at": null
   },
   {
@@ -94,8 +74,6 @@
     "name_th": "ชลบุรี",
     "name_en": "Chon Buri",
     "geography_id": 5,
-    "created_at": "9/8/2019 03:33:09",
-    "updated_at": "16/5/2022 06:31:03",
     "deleted_at": null
   },
   {
@@ -103,8 +81,6 @@
     "name_th": "ระยอง",
     "name_en": "Rayong",
     "geography_id": 5,
-    "created_at": "9/8/2019 03:33:09",
-    "updated_at": "16/5/2022 06:31:03",
     "deleted_at": null
   },
   {
@@ -112,8 +88,6 @@
     "name_th": "จันทบุรี",
     "name_en": "Chanthaburi",
     "geography_id": 5,
-    "created_at": "9/8/2019 03:33:09",
-    "updated_at": "16/5/2022 06:31:03",
     "deleted_at": null
   },
   {
@@ -121,8 +95,6 @@
     "name_th": "ตราด",
     "name_en": "Trat",
     "geography_id": 5,
-    "created_at": "9/8/2019 03:33:09",
-    "updated_at": "16/5/2022 06:31:03",
     "deleted_at": null
   },
   {
@@ -130,8 +102,6 @@
     "name_th": "ฉะเชิงเทรา",
     "name_en": "Chachoengsao",
     "geography_id": 5,
-    "created_at": "9/8/2019 03:33:09",
-    "updated_at": "16/5/2022 06:31:03",
     "deleted_at": null
   },
   {
@@ -139,8 +109,6 @@
     "name_th": "ปราจีนบุรี",
     "name_en": "Prachin Buri",
     "geography_id": 5,
-    "created_at": "9/8/2019 03:33:09",
-    "updated_at": "16/5/2022 06:31:03",
     "deleted_at": null
   },
   {
@@ -148,8 +116,6 @@
     "name_th": "นครนายก",
     "name_en": "Nakhon Nayok",
     "geography_id": 2,
-    "created_at": "9/8/2019 03:33:09",
-    "updated_at": "16/5/2022 06:31:03",
     "deleted_at": null
   },
   {
@@ -157,8 +123,6 @@
     "name_th": "สระแก้ว",
     "name_en": "Sa Kaeo",
     "geography_id": 5,
-    "created_at": "9/8/2019 03:33:09",
-    "updated_at": "16/5/2022 06:31:03",
     "deleted_at": null
   },
   {
@@ -166,8 +130,6 @@
     "name_th": "นครราชสีมา",
     "name_en": "Nakhon Ratchasima",
     "geography_id": 3,
-    "created_at": "9/8/2019 03:33:09",
-    "updated_at": "16/5/2022 06:31:03",
     "deleted_at": null
   },
   {
@@ -175,8 +137,6 @@
     "name_th": "บุรีรัมย์",
     "name_en": "Buri Ram",
     "geography_id": 3,
-    "created_at": "9/8/2019 03:33:09",
-    "updated_at": "16/5/2022 06:31:03",
     "deleted_at": null
   },
   {
@@ -184,8 +144,6 @@
     "name_th": "สุรินทร์",
     "name_en": "Surin",
     "geography_id": 3,
-    "created_at": "9/8/2019 03:33:09",
-    "updated_at": "16/5/2022 06:31:03",
     "deleted_at": null
   },
   {
@@ -193,8 +151,6 @@
     "name_th": "ศรีสะเกษ",
     "name_en": "Si Sa Ket",
     "geography_id": 3,
-    "created_at": "9/8/2019 03:33:09",
-    "updated_at": "16/5/2022 06:31:03",
     "deleted_at": null
   },
   {
@@ -202,8 +158,6 @@
     "name_th": "อุบลราชธานี",
     "name_en": "Ubon Ratchathani",
     "geography_id": 3,
-    "created_at": "9/8/2019 03:33:09",
-    "updated_at": "16/5/2022 06:31:03",
     "deleted_at": null
   },
   {
@@ -211,8 +165,6 @@
     "name_th": "ยโสธร",
     "name_en": "Yasothon",
     "geography_id": 3,
-    "created_at": "9/8/2019 03:33:09",
-    "updated_at": "16/5/2022 06:31:03",
     "deleted_at": null
   },
   {
@@ -220,8 +172,6 @@
     "name_th": "ชัยภูมิ",
     "name_en": "Chaiyaphum",
     "geography_id": 3,
-    "created_at": "9/8/2019 03:33:09",
-    "updated_at": "16/5/2022 06:31:03",
     "deleted_at": null
   },
   {
@@ -229,8 +179,6 @@
     "name_th": "อำนาจเจริญ",
     "name_en": "Amnat Charoen",
     "geography_id": 3,
-    "created_at": "9/8/2019 03:33:09",
-    "updated_at": "16/5/2022 06:31:03",
     "deleted_at": null
   },
   {
@@ -238,8 +186,6 @@
     "name_th": "หนองบัวลำภู",
     "name_en": "Nong Bua Lam Phu",
     "geography_id": 3,
-    "created_at": "9/8/2019 03:33:09",
-    "updated_at": "16/5/2022 06:31:03",
     "deleted_at": null
   },
   {
@@ -247,8 +193,6 @@
     "name_th": "ขอนแก่น",
     "name_en": "Khon Kaen",
     "geography_id": 3,
-    "created_at": "9/8/2019 03:33:09",
-    "updated_at": "16/5/2022 06:31:03",
     "deleted_at": null
   },
   {
@@ -256,8 +200,6 @@
     "name_th": "อุดรธานี",
     "name_en": "Udon Thani",
     "geography_id": 3,
-    "created_at": "9/8/2019 03:33:09",
-    "updated_at": "16/5/2022 06:31:03",
     "deleted_at": null
   },
   {
@@ -265,8 +207,6 @@
     "name_th": "เลย",
     "name_en": "Loei",
     "geography_id": 3,
-    "created_at": "9/8/2019 03:33:09",
-    "updated_at": "16/5/2022 06:31:03",
     "deleted_at": null
   },
   {
@@ -274,8 +214,6 @@
     "name_th": "หนองคาย",
     "name_en": "Nong Khai",
     "geography_id": 3,
-    "created_at": "9/8/2019 03:33:09",
-    "updated_at": "16/5/2022 06:31:03",
     "deleted_at": null
   },
   {
@@ -283,8 +221,6 @@
     "name_th": "มหาสารคาม",
     "name_en": "Maha Sarakham",
     "geography_id": 3,
-    "created_at": "9/8/2019 03:33:09",
-    "updated_at": "16/5/2022 06:31:03",
     "deleted_at": null
   },
   {
@@ -292,8 +228,6 @@
     "name_th": "ร้อยเอ็ด",
     "name_en": "Roi Et",
     "geography_id": 3,
-    "created_at": "9/8/2019 03:33:09",
-    "updated_at": "16/5/2022 06:31:03",
     "deleted_at": null
   },
   {
@@ -301,8 +235,6 @@
     "name_th": "กาฬสินธุ์",
     "name_en": "Kalasin",
     "geography_id": 3,
-    "created_at": "9/8/2019 03:33:09",
-    "updated_at": "16/5/2022 06:31:03",
     "deleted_at": null
   },
   {
@@ -310,8 +242,6 @@
     "name_th": "สกลนคร",
     "name_en": "Sakon Nakhon",
     "geography_id": 3,
-    "created_at": "9/8/2019 03:33:09",
-    "updated_at": "16/5/2022 06:31:03",
     "deleted_at": null
   },
   {
@@ -319,8 +249,6 @@
     "name_th": "นครพนม",
     "name_en": "Nakhon Phanom",
     "geography_id": 3,
-    "created_at": "9/8/2019 03:33:09",
-    "updated_at": "16/5/2022 06:31:03",
     "deleted_at": null
   },
   {
@@ -328,8 +256,6 @@
     "name_th": "มุกดาหาร",
     "name_en": "Mukdahan",
     "geography_id": 3,
-    "created_at": "9/8/2019 03:33:09",
-    "updated_at": "16/5/2022 06:31:03",
     "deleted_at": null
   },
   {
@@ -337,8 +263,6 @@
     "name_th": "เชียงใหม่",
     "name_en": "Chiang Mai",
     "geography_id": 1,
-    "created_at": "9/8/2019 03:33:09",
-    "updated_at": "16/5/2022 06:31:03",
     "deleted_at": null
   },
   {
@@ -346,8 +270,6 @@
     "name_th": "ลำพูน",
     "name_en": "Lamphun",
     "geography_id": 1,
-    "created_at": "9/8/2019 03:33:09",
-    "updated_at": "16/5/2022 06:31:03",
     "deleted_at": null
   },
   {
@@ -355,8 +277,6 @@
     "name_th": "ลำปาง",
     "name_en": "Lampang",
     "geography_id": 1,
-    "created_at": "9/8/2019 03:33:09",
-    "updated_at": "16/5/2022 06:31:03",
     "deleted_at": null
   },
   {
@@ -364,8 +284,6 @@
     "name_th": "อุตรดิตถ์",
     "name_en": "Uttaradit",
     "geography_id": 1,
-    "created_at": "9/8/2019 03:33:09",
-    "updated_at": "16/5/2022 06:31:03",
     "deleted_at": null
   },
   {
@@ -373,8 +291,6 @@
     "name_th": "แพร่",
     "name_en": "Phrae",
     "geography_id": 1,
-    "created_at": "9/8/2019 03:33:09",
-    "updated_at": "16/5/2022 06:31:03",
     "deleted_at": null
   },
   {
@@ -382,8 +298,6 @@
     "name_th": "น่าน",
     "name_en": "Nan",
     "geography_id": 1,
-    "created_at": "9/8/2019 03:33:09",
-    "updated_at": "16/5/2022 06:31:03",
     "deleted_at": null
   },
   {
@@ -391,8 +305,6 @@
     "name_th": "พะเยา",
     "name_en": "Phayao",
     "geography_id": 1,
-    "created_at": "9/8/2019 03:33:09",
-    "updated_at": "16/5/2022 06:31:03",
     "deleted_at": null
   },
   {
@@ -400,8 +312,6 @@
     "name_th": "เชียงราย",
     "name_en": "Chiang Rai",
     "geography_id": 1,
-    "created_at": "9/8/2019 03:33:09",
-    "updated_at": "16/5/2022 06:31:03",
     "deleted_at": null
   },
   {
@@ -409,8 +319,6 @@
     "name_th": "แม่ฮ่องสอน",
     "name_en": "Mae Hong Son",
     "geography_id": 1,
-    "created_at": "9/8/2019 03:33:09",
-    "updated_at": "16/5/2022 06:31:03",
     "deleted_at": null
   },
   {
@@ -418,8 +326,6 @@
     "name_th": "นครสวรรค์",
     "name_en": "Nakhon Sawan",
     "geography_id": 2,
-    "created_at": "9/8/2019 03:33:09",
-    "updated_at": "16/5/2022 06:31:03",
     "deleted_at": null
   },
   {
@@ -427,8 +333,6 @@
     "name_th": "อุทัยธานี",
     "name_en": "Uthai Thani",
     "geography_id": 2,
-    "created_at": "9/8/2019 03:33:09",
-    "updated_at": "16/5/2022 06:31:03",
     "deleted_at": null
   },
   {
@@ -436,8 +340,6 @@
     "name_th": "กำแพงเพชร",
     "name_en": "Kamphaeng Phet",
     "geography_id": 2,
-    "created_at": "9/8/2019 03:33:09",
-    "updated_at": "16/5/2022 06:31:03",
     "deleted_at": null
   },
   {
@@ -445,8 +347,6 @@
     "name_th": "ตาก",
     "name_en": "Tak",
     "geography_id": 4,
-    "created_at": "9/8/2019 03:33:09",
-    "updated_at": "16/5/2022 06:31:03",
     "deleted_at": null
   },
   {
@@ -454,8 +354,6 @@
     "name_th": "สุโขทัย",
     "name_en": "Sukhothai",
     "geography_id": 2,
-    "created_at": "9/8/2019 03:33:09",
-    "updated_at": "16/5/2022 06:31:03",
     "deleted_at": null
   },
   {
@@ -463,8 +361,6 @@
     "name_th": "พิษณุโลก",
     "name_en": "Phitsanulok",
     "geography_id": 2,
-    "created_at": "9/8/2019 03:33:09",
-    "updated_at": "16/5/2022 06:31:03",
     "deleted_at": null
   },
   {
@@ -472,8 +368,6 @@
     "name_th": "พิจิตร",
     "name_en": "Phichit",
     "geography_id": 2,
-    "created_at": "9/8/2019 03:33:09",
-    "updated_at": "16/5/2022 06:31:03",
     "deleted_at": null
   },
   {
@@ -481,8 +375,6 @@
     "name_th": "เพชรบูรณ์",
     "name_en": "Phetchabun",
     "geography_id": 2,
-    "created_at": "9/8/2019 03:33:09",
-    "updated_at": "16/5/2022 06:31:03",
     "deleted_at": null
   },
   {
@@ -490,8 +382,6 @@
     "name_th": "ราชบุรี",
     "name_en": "Ratchaburi",
     "geography_id": 4,
-    "created_at": "9/8/2019 03:33:09",
-    "updated_at": "16/5/2022 06:31:03",
     "deleted_at": null
   },
   {
@@ -499,8 +389,6 @@
     "name_th": "กาญจนบุรี",
     "name_en": "Kanchanaburi",
     "geography_id": 4,
-    "created_at": "9/8/2019 03:33:09",
-    "updated_at": "16/5/2022 06:31:03",
     "deleted_at": null
   },
   {
@@ -508,8 +396,6 @@
     "name_th": "สุพรรณบุรี",
     "name_en": "Suphan Buri",
     "geography_id": 2,
-    "created_at": "9/8/2019 03:33:09",
-    "updated_at": "16/5/2022 06:31:03",
     "deleted_at": null
   },
   {
@@ -517,8 +403,6 @@
     "name_th": "นครปฐม",
     "name_en": "Nakhon Pathom",
     "geography_id": 2,
-    "created_at": "9/8/2019 03:33:09",
-    "updated_at": "16/5/2022 06:31:03",
     "deleted_at": null
   },
   {
@@ -526,8 +410,6 @@
     "name_th": "สมุทรสาคร",
     "name_en": "Samut Sakhon",
     "geography_id": 2,
-    "created_at": "9/8/2019 03:33:09",
-    "updated_at": "16/5/2022 06:31:03",
     "deleted_at": null
   },
   {
@@ -535,8 +417,6 @@
     "name_th": "สมุทรสงคราม",
     "name_en": "Samut Songkhram",
     "geography_id": 2,
-    "created_at": "9/8/2019 03:33:09",
-    "updated_at": "16/5/2022 06:31:03",
     "deleted_at": null
   },
   {
@@ -544,8 +424,6 @@
     "name_th": "เพชรบุรี",
     "name_en": "Phetchaburi",
     "geography_id": 4,
-    "created_at": "9/8/2019 03:33:09",
-    "updated_at": "16/5/2022 06:31:03",
     "deleted_at": null
   },
   {
@@ -553,8 +431,6 @@
     "name_th": "ประจวบคีรีขันธ์",
     "name_en": "Prachuap Khiri Khan",
     "geography_id": 4,
-    "created_at": "9/8/2019 03:33:09",
-    "updated_at": "16/5/2022 06:31:03",
     "deleted_at": null
   },
   {
@@ -562,8 +438,6 @@
     "name_th": "นครศรีธรรมราช",
     "name_en": "Nakhon Si Thammarat",
     "geography_id": 6,
-    "created_at": "9/8/2019 03:33:09",
-    "updated_at": "16/5/2022 06:31:03",
     "deleted_at": null
   },
   {
@@ -571,8 +445,6 @@
     "name_th": "กระบี่",
     "name_en": "Krabi",
     "geography_id": 6,
-    "created_at": "9/8/2019 03:33:09",
-    "updated_at": "16/5/2022 06:31:03",
     "deleted_at": null
   },
   {
@@ -580,8 +452,6 @@
     "name_th": "พังงา",
     "name_en": "Phangnga",
     "geography_id": 6,
-    "created_at": "9/8/2019 03:33:09",
-    "updated_at": "16/5/2022 06:31:03",
     "deleted_at": null
   },
   {
@@ -589,8 +459,6 @@
     "name_th": "ภูเก็ต",
     "name_en": "Phuket",
     "geography_id": 6,
-    "created_at": "9/8/2019 03:33:09",
-    "updated_at": "16/5/2022 06:31:03",
     "deleted_at": null
   },
   {
@@ -598,8 +466,6 @@
     "name_th": "สุราษฎร์ธานี",
     "name_en": "Surat Thani",
     "geography_id": 6,
-    "created_at": "9/8/2019 03:33:09",
-    "updated_at": "16/5/2022 06:31:03",
     "deleted_at": null
   },
   {
@@ -607,8 +473,6 @@
     "name_th": "ระนอง",
     "name_en": "Ranong",
     "geography_id": 6,
-    "created_at": "9/8/2019 03:33:09",
-    "updated_at": "16/5/2022 06:31:03",
     "deleted_at": null
   },
   {
@@ -616,8 +480,6 @@
     "name_th": "ชุมพร",
     "name_en": "Chumphon",
     "geography_id": 6,
-    "created_at": "9/8/2019 03:33:09",
-    "updated_at": "16/5/2022 06:31:03",
     "deleted_at": null
   },
   {
@@ -625,8 +487,6 @@
     "name_th": "สงขลา",
     "name_en": "Songkhla",
     "geography_id": 6,
-    "created_at": "9/8/2019 03:33:09",
-    "updated_at": "16/5/2022 06:31:03",
     "deleted_at": null
   },
   {
@@ -634,8 +494,6 @@
     "name_th": "สตูล",
     "name_en": "Satun",
     "geography_id": 6,
-    "created_at": "9/8/2019 03:33:09",
-    "updated_at": "16/5/2022 06:31:03",
     "deleted_at": null
   },
   {
@@ -643,8 +501,6 @@
     "name_th": "ตรัง",
     "name_en": "Trang",
     "geography_id": 6,
-    "created_at": "9/8/2019 03:33:09",
-    "updated_at": "16/5/2022 06:31:03",
     "deleted_at": null
   },
   {
@@ -652,8 +508,6 @@
     "name_th": "พัทลุง",
     "name_en": "Phatthalung",
     "geography_id": 6,
-    "created_at": "9/8/2019 03:33:09",
-    "updated_at": "16/5/2022 06:31:03",
     "deleted_at": null
   },
   {
@@ -661,8 +515,6 @@
     "name_th": "ปัตตานี",
     "name_en": "Pattani",
     "geography_id": 6,
-    "created_at": "9/8/2019 03:33:09",
-    "updated_at": "16/5/2022 06:31:03",
     "deleted_at": null
   },
   {
@@ -670,8 +522,6 @@
     "name_th": "ยะลา",
     "name_en": "Yala",
     "geography_id": 6,
-    "created_at": "9/8/2019 03:33:09",
-    "updated_at": "16/5/2022 06:31:03",
     "deleted_at": null
   },
   {
@@ -679,8 +529,6 @@
     "name_th": "นราธิวาส",
     "name_en": "Narathiwat",
     "geography_id": 6,
-    "created_at": "9/8/2019 03:33:09",
-    "updated_at": "16/5/2022 06:31:03",
     "deleted_at": null
   },
   {
@@ -688,8 +536,6 @@
     "name_th": "บึงกาฬ",
     "name_en": "buogkan",
     "geography_id": 3,
-    "created_at": "9/8/2019 03:33:09",
-    "updated_at": "16/5/2022 06:31:03",
     "deleted_at": null
   }
 ]
